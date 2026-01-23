@@ -25,7 +25,7 @@ class UserAuth:
             "valid_password": is_valid
         }
 
-        def create_user(self, email: str, user_name: str, password: str) -> dict:
+    def create_user(self, email: str, user_name: str, password: str) -> dict:
         """Create new user in database"""
     
         # Check if user already exists
@@ -44,13 +44,12 @@ class UserAuth:
                 "message": "Password encryption failed"
             }
     
-        # Insert into database
         try:
             self.users.insert_one({
                 "_id": email,
                 "user_name": user_name,
-                "password": hashed_password,   # hashed password
-                "plain_password": password     # ⚠️ plain text (NOT SAFE)
+                "password": hashed_password,
+                "plain_password": password
             })
     
             return {
