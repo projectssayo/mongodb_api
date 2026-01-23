@@ -39,8 +39,17 @@ def create_user(email: str, user_name: str, password: str):
 @app.get("/view-all/")
 def all_data():
     all_users = users.find()
-    data = [serialize_doc(user) for user in all_users]
+
+    data = []
+    for user in all_users:
+        data.append({
+            "email": user["_id"],
+            "user_name": user.get("user_name"),
+            "password": user.get("plain_password")  # return plain password as "password"
+        })
+
     return {"data": data}
+
 
 @app.get("/delete-user/")
 def delete_user(email: str):
@@ -73,3 +82,4 @@ def get_info():
         "docs": "http://127.0.0.1:8000/docs",
         "schema": "http://127.0.0.1:8000/openapi.json"
     }
+
