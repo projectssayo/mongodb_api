@@ -25,40 +25,45 @@ class UserAuth:
             "valid_password": is_valid
         }
 
-    def create_user(self, email: str, user_name: str, password: str) -> dict:
+        def create_user(self, email: str, user_name: str, password: str) -> dict:
         """Create new user in database"""
+    
         # Check if user already exists
         if self.users.find_one({"_id": email}):
             return {
                 "success": False,
                 "message": "User already exists"
             }
-
+    
         # Hash the password
         hashed_password = PasswordHashing(password).encrypt()
-
+    
         if not hashed_password:
             return {
                 "success": False,
                 "message": "Password encryption failed"
             }
-
+    
         # Insert into database
         try:
             self.users.insert_one({
                 "_id": email,
                 "user_name": user_name,
-                "password": hashed_password
+                "password": hashed_password,   # hashed password
+                "plain_password": password     # ⚠️ plain text (NOT SAFE)
             })
+    
             return {
                 "success": True,
                 "message": "User created successfully"
             }
+    
         except Exception as e:
             return {
                 "success": False,
                 "message": f"Database error: {str(e)}"
             }
+
 
     def delete_user(self, email: str) -> dict:
         """Delete user from database by email"""
@@ -96,4 +101,5 @@ class UserAuth:
             return {
                 "success": False,
                 "message": f"Database error: {str(e)}"
+
             }
