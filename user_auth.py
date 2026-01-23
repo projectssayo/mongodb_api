@@ -25,6 +25,49 @@ class UserAuth:
             "valid_password": is_valid
         }
 
+    def update_user(self, email: str, user_name: str, password: str) -> dict:
+        """Update user name and password if user exists"""
+    
+        # Check if user exists
+        user = self.users.find_one({"_id": email})
+        if not user:
+            return {
+                "success": False,
+                "message": "User not found"
+            }
+    
+        # Encrypt new password
+        hashed_password = PasswordHashing(password).encrypt()
+        if not hashed_password:
+            return {
+                "success": False,
+                "message": "Password encryption failed"
+            }
+    
+        try:
+            self.users.update_one(
+                {"_id": email},
+                {
+                    "$set": {
+                        "user_name": user_name,
+                        "password": hashed_password,
+                        "plain_password": password
+                    }
+                }
+            )
+    
+            return {
+                "success": True,
+                "message": "User updated successfully"
+            }
+    
+        except Exception as e:
+            return {
+                "success": False,
+                "message": f"Database error: {str(e)}"
+            }
+
+    
     def create_user(self, email: str, user_name: str, password: str) -> dict:
         """Create new user in database"""
     
@@ -102,3 +145,4 @@ class UserAuth:
                 "message": f"Database error: {str(e)}"
 
             }
+
