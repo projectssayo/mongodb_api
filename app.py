@@ -89,15 +89,16 @@ def update_user(email: str, user_name: str, password: str):
 @app.get("/info")
 def get_info():
     return {
-        "verify": "https://mongodb-api-9kpz.onrender.com/verify-user/?email=a@gmail.com&password=1234",
-        "insert": "https://mongodb-api-9kpz.onrender.com/create-user/?email=a@gmail.com&user_name=alex&password=1234",
-        "update": "https://mongodb-api-9kpz.onrender.com/update-user/?email=a@gmail.com&user_name=alex_new&password=12345",
-        "view_all": "https://mongodb-api-9kpz.onrender.com/view-all/",
-        "delete": "https://mongodb-api-9kpz.onrender.com/delete-user/?email=a@gmail.com",
-        "check_email": "https://mongodb-api-9kpz.onrender.com/if-email-exist/?email=a@gmail.com",
-        "docs": "https://mongodb-api-9kpz.onrender.com/docs",
-        "schema": "https://mongodb-api-9kpz.onrender.com/openapi.json"
+        "verify": "https://mongodb-api-q7y4.onrender.com/verify-user/?email=a@gmail.com&password=1234",
+        "insert": "https://mongodb-api-q7y4.onrender.com/create-user/?email=a@gmail.com&user_name=alex&password=1234",
+        "update": "https://mongodb-api-q7y4.onrender.com/update-user/?email=a@gmail.com&user_name=alex_new&password=12345",
+        "view_all": "https://mongodb-api-q7y4.onrender.com/view-all/",
+        "delete": "https://mongodb-api-q7y4.onrender.com/delete-user/?email=a@gmail.com",
+        "check_email": "https://mongodb-api-q7y4.onrender.com/if-email-exist/?email=a@gmail.com",
+        "docs": "https://mongodb-api-q7y4.onrender.com/docs",
+        "schema": "https://mongodb-api-q7y4.onrender.com/openapi.json"
     }
+
 
 
 
